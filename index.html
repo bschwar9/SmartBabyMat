@@ -77,4 +77,16 @@
 </body>
 </html>
 
+<button onclick="fireConfetti()">Test Confetti</button>
+<script>
+    function fireConfetti() {
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.5, x: 0.5 }
+        });
+    }
+</script>
+
+
 
