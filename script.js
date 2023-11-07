@@ -13,4 +13,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
         .catch(error => {
             console.error('There has been a problem with your fetch operation:', error);
         });
+    document.addEventListener('click', function() {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    });
 });
