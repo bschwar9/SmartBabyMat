@@ -22,6 +22,7 @@ document.addEventListener('click', function() {
     confetti({
         particleCount: 100,
         spread: 70,
-        origin: { y: 0.6 }
+        origin: { y: 0.5, x: 0.5 } // Fire from the center of the screen
     });
 });
+
