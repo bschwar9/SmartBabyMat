@@ -1,4 +1,6 @@
+// This function will run when the DOM is fully loaded
 window.addEventListener('DOMContentLoaded', (event) => {
+    // Fetch and display the latest image from the Raspberry Pi
     fetch('https://1mkbfmthe9.execute-api.us-east-2.amazonaws.com/getLatestImage')
         .then(response => {
             if (response.ok) {
@@ -13,11 +15,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
         .catch(error => {
             console.error('There has been a problem with your fetch operation:', error);
         });
-    document.addEventListener('click', function() {
-      confetti({
+});
+
+// Event listener to fire confetti when the user clicks anywhere on the page
+document.addEventListener('click', function() {
+    confetti({
         particleCount: 100,
         spread: 70,
         origin: { y: 0.6 }
-      });
     });
 });
