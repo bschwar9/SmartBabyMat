@@ -21,13 +21,13 @@
 </html>
 -->
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Latest Raspberry Pi Image</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1/dist/confetti.min.js"></script>
-    <script src="script.js"></script>
     <style>
         body {
             text-align: center;
@@ -35,11 +35,18 @@
             color: #fff;
         }
 
+        #confettiButton {
+            position: absolute; /* Absolute positioning relative to the nearest positioned ancestor */
+            top: 10px; /* 10 pixels from the top */
+            left: 10px; /* 10 pixels from the left */
+            z-index: 1000; /* Ensures the button is above other elements */
+        }
+
         #raspberryImage {
             width: 50%; /* Adjust the size as needed */
             height: auto;
             display: block;
-            margin: 0 auto; /* Centers the image */
+            margin: 20px auto; /* Centers the image */
             border: 5px solid #fff; /* Optional: adds a white border around the image */
             box-shadow: 0 0 10px #fff; /* Optional: adds a glow effect */
             animation: spin 2s linear infinite, color-shift 1s linear infinite;
@@ -71,22 +78,42 @@
     </style>
 </head>
 <body>
+    <button id="confettiButton" onclick="fireConfetti()">Test Confetti</button>
     <h1>Latest Image from Raspberry Pi</h1>
     <img id="raspberryImage" src="" alt="Latest Raspberry Pi Image">
     <script src="script.js"></script>
+    <script>
+        // This function will run when the DOM is fully loaded
+        window.addEventListener('DOMContentLoaded', (event) => {
+            // Fetch and display the latest image from the Raspberry Pi
+            fetch('https://1mkbfmthe9.execute-api.us-east-2.amazonaws.com/getLatestImage')
+                .then(response => {
+                    if (response.ok) {
+                        return response.blob(); // Assuming the response is an image blob
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(blob => {
+                    const imageUrl = URL.createObjectURL(blob);
+                    document.getElementById('raspberryImage').src = imageUrl;
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+        });
+
+        // Function to fire confetti
+        function fireConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.5, x: 0.5 }
+            });
+        }
+    </script>
 </body>
 </html>
 
-<button onclick="fireConfetti()">Test Confetti</button>
-<script>
-    function fireConfetti() {
-        confetti({
-            particleCount: 100,
-            spread: 70,
-            origin: { y: 0.5, x: 0.5 }
-        });
-    }
-</script>
 
 
 
