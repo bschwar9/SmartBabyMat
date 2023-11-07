@@ -21,7 +21,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 document.addEventListener('click', function() {
     confetti({
         particleCount: 100,
-        spread: 70,
+        spread: 200,
         origin: { y: 0.5, x: 0.5 } // Fire from the center of the screen
     });
 });
