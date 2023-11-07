@@ -32,21 +32,22 @@
             text-align: center;
             background-color: #000;
             color: #fff;
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* Ensures no scrolling */
         }
 
         #raspberryImage {
-            width: 50%;
+            width: 50%; /* Adjust the size as needed */
             height: auto;
             display: block;
-            margin: 20px auto;
-            border: 5px solid #fff;
-            box-shadow: 0 0 10px #fff;
-            animation: spin 2s linear infinite, color-shift 1s linear infinite;
+            margin: 20px auto; /* Centers the image */
+            border: 5px solid #fff; /* Optional: adds a white border around the image */
+            box-shadow: 0 0 10px #fff; /* Optional: adds a glow effect */
             position: relative;
             z-index: 1;
+        }
+
+        /* New class for animating the image */
+        .spinning {
+            animation: spin 2s linear infinite, color-shift 1s linear infinite;
         }
 
         @keyframes spin {
@@ -61,26 +62,19 @@
             75% { filter: hue-rotate(270deg); }
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1/dist/confetti.min.js"></script>
 </head>
 <body>
     <h1>Latest Image from Raspberry Pi</h1>
     <img id="raspberryImage" src="" alt="Latest Raspberry Pi Image">
     <script>
-        // Function to fire confetti
-        function fireConfetti() {
-            confetti({
-                particleCount: 150,
-                spread: 120,
-                startVelocity: 30,
-                decay: 0.9,
-                scalar: 1.2,
-                zIndex: 9999
-            });
+        // Function to add spinning animation to the image
+        function addSpinningEffect() {
+            var img = document.getElementById('raspberryImage');
+            img.classList.add('spinning');
         }
 
         // Event listener for clicks on the document body
-        document.body.addEventListener('click', fireConfetti);
+        document.body.addEventListener('click', addSpinningEffect);
 
         // This function will run when the DOM is fully loaded
         window.addEventListener('DOMContentLoaded', (event) => {
@@ -103,6 +97,7 @@
     </script>
 </body>
 </html>
+
 
 
 
