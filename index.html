@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,3 +19,36 @@
     <script src="script.js"></script>
 </body>
 </html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Latest Raspberry Pi Image</title>
+    <style>
+        #raspberryImage {
+            width: 50%; /* or any size in pixels, like 500px */
+            height: auto;
+            display: block; /* to prevent inline extra space */
+            margin: 0 auto; /* to center the image on the page */
+            animation: spin 2s linear infinite; /* Adjust time and other properties as needed */
+        }
+
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+    </style>
+</head>
+<body>
+    <h1>Latest Image from Raspberry Pi</h1>
+    <img id="raspberryImage" src="" alt="Latest Raspberry Pi Image">
+    <script src="script.js"></script>
+</body>
+</html>
+
