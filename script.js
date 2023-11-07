@@ -7,8 +7,16 @@ function toggleSpinningEffect() {
 // Event listener for clicks on the document body to toggle image spinning
 document.body.addEventListener('click', toggleSpinningEffect);
 
+var audio = new Audio();
+
 // Function to fetch and play the latest audio
 function playLatestAudio() {
+    // If the audio is already playing, reset it
+    if (!audio.paused) {
+        audio.pause();
+        audio.currentTime = 0;
+    }
+
     fetch('https://1mkbfmthe9.execute-api.us-east-2.amazonaws.com/getLatestAudio')
         .then(response => {
             if (response.ok) {
@@ -17,8 +25,11 @@ function playLatestAudio() {
             throw new Error('Network response was not ok.');
         })
         .then(blob => {
+            // Only change the src if a new blob is fetched
             const audioUrl = URL.createObjectURL(blob);
-            const audio = new Audio(audioUrl);
+            if (audio.src !== audioUrl) {
+                audio.src = audioUrl;
+            }
             audio.play();
         })
         .catch(error => {
