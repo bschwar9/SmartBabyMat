@@ -27,21 +27,44 @@
     <meta charset="UTF-8">
     <title>Latest Raspberry Pi Image</title>
     <style>
+        body {
+            text-align: center;
+            background-color: #000; /* Set a dark background for better effect */
+            color: #fff;
+        }
+
         #raspberryImage {
-            width: 50%; /* or any size in pixels, like 500px */
+            width: 50%; /* Adjust the size as needed */
             height: auto;
-            display: block; /* to prevent inline extra space */
-            margin: 0 auto; /* to center the image on the page */
-            animation: spin 2s linear infinite; /* Adjust time and other properties as needed */
+            display: block;
+            margin: 0 auto; /* Centers the image */
+            border: 5px solid #fff; /* Optional: adds a white border around the image */
+            box-shadow: 0 0 10px #fff; /* Optional: adds a glow effect */
+            animation: spin 10s linear infinite, color-shift 1s linear infinite;
         }
 
         @keyframes spin {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes color-shift {
+            0%, 100% {
+                filter: hue-rotate(0deg);
+            }
+            25% {
+                filter: hue-rotate(90deg);
+            }
+            50% {
+                filter: hue-rotate(180deg);
+            }
+            75% {
+                filter: hue-rotate(270deg);
+            }
         }
     </style>
 </head>
@@ -51,4 +74,5 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
