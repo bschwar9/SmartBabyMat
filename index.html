@@ -27,63 +27,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Latest Raspberry Pi Image</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1/dist/confetti.min.js"></script>
     <style>
         body {
             text-align: center;
-            background-color: #000; /* Set a dark background for better effect */
+            background-color: #000;
             color: #fff;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Ensures no scrolling */
         }
 
         #raspberryImage {
-            width: 50%; /* Adjust the size as needed */
+            width: 50%;
             height: auto;
             display: block;
-            margin: 20px auto; /* Centers the image */
-            border: 5px solid #fff; /* Optional: adds a white border around the image */
-            box-shadow: 0 0 10px #fff; /* Optional: adds a glow effect */
+            margin: 20px auto;
+            border: 5px solid #fff;
+            box-shadow: 0 0 10px #fff;
             animation: spin 2s linear infinite, color-shift 1s linear infinite;
-            position: relative; /* Ensure the image has positioning context */
-            z-index: 1; /* Lower z-index than confetti */
-        }
-
-        #confettiButton {
-            position: absolute; /* Absolute positioning relative to the nearest positioned ancestor */
-            top: 10px; /* 10 pixels from the top */
-            left: 10px; /* 10 pixels from the left */
-            z-index: 2; /* Ensures the button is above the image */
+            position: relative;
+            z-index: 1;
         }
 
         @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         @keyframes color-shift {
-            0%, 100% {
-                filter: hue-rotate(0deg);
-            }
-            25% {
-                filter: hue-rotate(90deg);
-            }
-            50% {
-                filter: hue-rotate(180deg);
-            }
-            75% {
-                filter: hue-rotate(270deg);
-            }
+            0%, 100% { filter: hue-rotate(0deg); }
+            25% { filter: hue-rotate(90deg); }
+            50% { filter: hue-rotate(180deg); }
+            75% { filter: hue-rotate(270deg); }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1/dist/confetti.min.js"></script>
 </head>
 <body>
-    <button id="confettiButton" onclick="fireConfetti()">Test Confetti</button>
     <h1>Latest Image from Raspberry Pi</h1>
     <img id="raspberryImage" src="" alt="Latest Raspberry Pi Image">
     <script>
+        // Function to fire confetti
+        function fireConfetti() {
+            confetti({
+                particleCount: 150,
+                spread: 120,
+                startVelocity: 30,
+                decay: 0.9,
+                scalar: 1.2,
+                zIndex: 9999
+            });
+        }
+
+        // Event listener for clicks on the document body
+        document.body.addEventListener('click', fireConfetti);
+
         // This function will run when the DOM is fully loaded
         window.addEventListener('DOMContentLoaded', (event) => {
             // Fetch and display the latest image from the Raspberry Pi
@@ -102,21 +100,10 @@
                     console.error('There has been a problem with your fetch operation:', error);
                 });
         });
-
-        // Function to fire confetti
-        function fireConfetti() {
-            confetti({
-                particleCount: 150,
-                spread: 120,
-                startVelocity: 30,
-                decay: 0.9,
-                scalar: 1.2,
-                zIndex: 9999 // High z-index to ensure it's on top
-            });
-        }
     </script>
 </body>
 </html>
+
 
 
 
