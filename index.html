@@ -35,13 +35,6 @@
             color: #fff;
         }
 
-        #confettiButton {
-            position: absolute; /* Absolute positioning relative to the nearest positioned ancestor */
-            top: 10px; /* 10 pixels from the top */
-            left: 10px; /* 10 pixels from the left */
-            z-index: 1000; /* Ensures the button is above other elements */
-        }
-
         #raspberryImage {
             width: 50%; /* Adjust the size as needed */
             height: auto;
@@ -50,6 +43,15 @@
             border: 5px solid #fff; /* Optional: adds a white border around the image */
             box-shadow: 0 0 10px #fff; /* Optional: adds a glow effect */
             animation: spin 2s linear infinite, color-shift 1s linear infinite;
+            position: relative; /* Ensure the image has positioning context */
+            z-index: 1; /* Lower z-index than confetti */
+        }
+
+        #confettiButton {
+            position: absolute; /* Absolute positioning relative to the nearest positioned ancestor */
+            top: 10px; /* 10 pixels from the top */
+            left: 10px; /* 10 pixels from the left */
+            z-index: 2; /* Ensures the button is above the image */
         }
 
         @keyframes spin {
@@ -81,7 +83,6 @@
     <button id="confettiButton" onclick="fireConfetti()">Test Confetti</button>
     <h1>Latest Image from Raspberry Pi</h1>
     <img id="raspberryImage" src="" alt="Latest Raspberry Pi Image">
-    <script src="script.js"></script>
     <script>
         // This function will run when the DOM is fully loaded
         window.addEventListener('DOMContentLoaded', (event) => {
@@ -105,14 +106,18 @@
         // Function to fire confetti
         function fireConfetti() {
             confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.5, x: 0.5 }
+                particleCount: 150,
+                spread: 120,
+                startVelocity: 30,
+                decay: 0.9,
+                scalar: 1.2,
+                zIndex: 9999 // High z-index to ensure it's on top
             });
         }
     </script>
 </body>
 </html>
+
 
 
 
