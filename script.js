@@ -1,3 +1,12 @@
+// Function to toggle spinning animation on the image
+function toggleSpinningEffect() {
+    var img = document.getElementById('raspberryImage');
+    img.classList.toggle('spinning');
+}
+
+// Event listener for clicks on the document body
+document.body.addEventListener('click', toggleSpinningEffect);
+
 // This function will run when the DOM is fully loaded
 window.addEventListener('DOMContentLoaded', (event) => {
     // Fetch and display the latest image from the Raspberry Pi
@@ -16,4 +25,3 @@ window.addEventListener('DOMContentLoaded', (event) => {
             console.error('There has been a problem with your fetch operation:', error);
         });
 });
-
