@@ -17,12 +17,3 @@ window.addEventListener('DOMContentLoaded', (event) => {
         });
 });
 
-// Event listener to fire confetti when the user clicks anywhere on the page
-document.addEventListener('click', function() {
-    confetti({
-        particleCount: 100,
-        spread: 200,
-        origin: { y: 0.5, x: 0.5 } // Fire from the center of the screen
-    });
-});
-
