@@ -32,15 +32,18 @@
             text-align: center;
             background-color: #000;
             color: #fff;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Ensures no scrolling */
         }
 
         #raspberryImage {
-            width: 50%; /* Adjust the size as needed */
+            width: 50%;
             height: auto;
             display: block;
-            margin: 20px auto; /* Centers the image */
-            border: 5px solid #fff; /* Optional: adds a white border around the image */
-            box-shadow: 0 0 10px #fff; /* Optional: adds a glow effect */
+            margin: 20px auto;
+            border: 5px solid #fff;
+            box-shadow: 0 0 10px #fff;
             position: relative;
             z-index: 1;
         }
@@ -62,42 +65,66 @@
             75% { filter: hue-rotate(270deg); }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1/dist/confetti.min.js"></script>
 </head>
 <body>
     <h1>Latest Image from Raspberry Pi</h1>
-    <img id="raspberryImage" src="" alt="Latest Raspberry Pi Image">
+    <img id="raspberryImage" src="" alt="Latest Raspberry Pi Image" onclick="toggleSpinningEffect()">
+    
+    <!-- Audio button -->
     <button id="audioButton">Play Latest Audio</button>
+
     <script>
-    // Function to toggle spinning animation on the image
-    function toggleSpinningEffect() {
-        var img = document.getElementById('raspberryImage');
-        img.classList.toggle('spinning');
-    }
+        // Function to toggle spinning animation on the image
+        function toggleSpinningEffect() {
+            var img = document.getElementById('raspberryImage');
+            img.classList.toggle('spinning');
+        }
 
-    // Event listener for clicks on the document body
-    document.body.addEventListener('click', toggleSpinningEffect);
+        // Function to fetch and play the latest audio
+        function playLatestAudio() {
+            fetch('https://1mkbfmthe9.execute-api.us-east-2.amazonaws.com/getLatestAudio')
+                .then(response => {
+                    if (response.ok) {
+                        return response.blob();
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(blob => {
+                    const audioUrl = URL.createObjectURL(blob);
+                    const audio = new Audio(audioUrl);
+                    audio.play();
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+        }
 
-    // This function will run when the DOM is fully loaded
-    window.addEventListener('DOMContentLoaded', (event) => {
-        // Fetch and display the latest image from the Raspberry Pi
-        fetch('https://1mkbfmthe9.execute-api.us-east-2.amazonaws.com/getLatestImage')
-            .then(response => {
-                if (response.ok) {
-                    return response.blob(); // Assuming the response is an image blob
-                }
-                throw new Error('Network response was not ok.');
-            })
-            .then(blob => {
-                const imageUrl = URL.createObjectURL(blob);
-                document.getElementById('raspberryImage').src = imageUrl;
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
-    });
-</script>
+        // Event listener for the audio button
+        document.getElementById('audioButton').addEventListener('click', playLatestAudio);
+
+        // This function will run when the DOM is fully loaded
+        window.addEventListener('DOMContentLoaded', (event) => {
+            // Fetch and display the latest image from the Raspberry Pi
+            fetch('https://1mkbfmthe9.execute-api.us-east-2.amazonaws.com/getLatestImage')
+                .then(response => {
+                    if (response.ok) {
+                        return response.blob();
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(blob => {
+                    const imageUrl = URL.createObjectURL(blob);
+                    document.getElementById('raspberryImage').src = imageUrl;
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+        });
+    </script>
 </body>
 </html>
+
 
 
 
