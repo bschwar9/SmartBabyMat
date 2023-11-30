@@ -4,14 +4,13 @@ function toggleSpinningEffect() {
     img.classList.toggle('spinning');
 }
 
-// Event listener for clicks on the document body to toggle image spinning
-document.body.addEventListener('click', toggleSpinningEffect);
+// Event listener for the image to toggle spinning effect
+document.getElementById('raspberryImage').addEventListener('click', toggleSpinningEffect);
 
 var audio = new Audio();
 
 // Function to fetch and play the latest audio
 function playLatestAudio() {
-    // If the audio is already playing, reset it
     if (!audio.paused) {
         audio.pause();
         audio.currentTime = 0;
@@ -43,36 +42,20 @@ function displayWeightData() {
     const endDate = '2023-11-04T17:52:14.452559';
     const apiUrl = `https://1mkbfmthe9.execute-api.us-east-2.amazonaws.com/getWeights?startDate=${startDate}&endDate=${endDate}`;
 
-    // Log the URL to the console for verification
-    console.log("Fetching data from:", apiUrl);
-
     fetch(apiUrl)
-        .then(response => {
-            console.log("Response received:", response);
-            if (response.ok) {
-                return response.json();
-            } else {
-                // Log non-ok responses to the console
-                console.error('Network response was not ok:', response);
-                throw new Error('Network response was not ok.');
-            }
-        })
+        .then(response => response.ok ? response.json() : Promise.reject('Failed to load'))
         .then(data => {
-            console.log("Data received:", data);
             const tableBody = document.getElementById('weightTable').querySelector('tbody');
             let rows = '';
             data.forEach(item => {
-                // Assuming 'date' and 'weight' are the correct properties
                 rows += `<tr><td>${item.date}</td><td>${item.weight}</td></tr>`;
             });
             tableBody.innerHTML = rows;
         })
         .catch(error => {
-            // Log any errors to the console
             console.error('There was a problem with fetching weight data:', error);
         });
 }
-
 
 // This function will run when the DOM is fully loaded
 window.addEventListener('DOMContentLoaded', (event) => {
