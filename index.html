@@ -10,7 +10,7 @@
             color: #fff;
             margin: 0;
             padding: 0;
-            /* overflow: hidden; /* Ensures no scrolling */
+            overflow: hidden; /* Ensures no scrolling */
         }
 
         #raspberryImage {
@@ -40,7 +40,34 @@
             50% { filter: hue-rotate(180deg); }
             75% { filter: hue-rotate(270deg); }
         }
+
+        /* Styles for the weight data table */
+        #weightTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        #weightTable th,
+        #weightTable td {
+            border: 1px solid #fff;
+            padding: 8px;
+            text-align: center;
+        }
+
+        #weightTable th {
+            background-color: #222;
+        }
+
+        #weightTable td {
+            background-color: #444;
+        }
+
+        #weightTable tr:nth-child(even) {
+            background-color: #333;
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1/dist/confetti.min.js"></script>
 </head>
 <body>
     <h1>SmartBabyMat</h1>
@@ -63,11 +90,6 @@
         </table>
     </div>
 
-    <!-- Scripts at the bottom of the body -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1/dist/confetti.min.js"></script>
     <script src="script.js"></script>
-    <script>
-        // The contents of script.js should be pasted here if you want to include it inline instead of linking to an external file
-    </script>
 </body>
 </html>
