@@ -43,7 +43,7 @@ document.getElementById('audioButton').addEventListener('click', playLatestAudio
 
 // This function fetches and displays weight data
 function displayWeightData() {
-    const startDate = '2023-11-04T16:22:14.452559';
+    const startDate = '2023-10-01T16:22:14.452559';
     const endDate = '2023-11-04T17:52:14.452559';
     const apiUrl = `https://1mkbfmthe9.execute-api.us-east-2.amazonaws.com/getWeights?startDate=${startDate}&endDate=${endDate}`;
 
