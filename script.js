@@ -25,11 +25,8 @@ function playLatestAudio() {
             throw new Error('Network response was not ok.');
         })
         .then(blob => {
-            // Only change the src if a new blob is fetched
             const audioUrl = URL.createObjectURL(blob);
-            if (audio.src !== audioUrl) {
-                audio.src = audioUrl;
-            }
+            audio.src = audioUrl;
             audio.play();
         })
         .catch(error => {
@@ -40,30 +37,21 @@ function playLatestAudio() {
 // Event listener for the audio button
 document.getElementById('audioButton').addEventListener('click', playLatestAudio);
 
-
-// This function fetches and displays weight data
+// Function to fetch and display weight data
 function displayWeightData() {
     const startDate = '2023-11-04T16:22:14.452559';
     const endDate = '2023-11-04T17:52:14.452559';
     const apiUrl = `https://1mkbfmthe9.execute-api.us-east-2.amazonaws.com/getWeights?startDate=${startDate}&endDate=${endDate}`;
 
     fetch(apiUrl)
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Network response was not ok.');
-        })
+        .then(response => response.ok ? response.json() : Promise.reject('Failed to load'))
         .then(data => {
             const tableBody = document.getElementById('weightTable').querySelector('tbody');
-            // Convert fetched data into a plain text string
-            let plainTextData = '';
+            let rows = '';
             data.forEach(item => {
-                // Append each data item as a line of text
-                plainTextData += `${item.date}: ${item.weight}\n`; // Adjust keys according to your actual data properties
+                rows += `<tr><td>${item.date}</td><td>${item.weight}</td></tr>`;
             });
-            // Insert plain text data into the table body
-            tableBody.innerHTML = `<tr><td><pre>${plainTextData}</pre></td></tr>`;
+            tableBody.innerHTML = rows;
         })
         .catch(error => {
             console.error('There was a problem with fetching weight data:', error);
@@ -72,7 +60,6 @@ function displayWeightData() {
 
 // This function will run when the DOM is fully loaded
 window.addEventListener('DOMContentLoaded', (event) => {
-    // Fetch and display the latest image from the Raspberry Pi
     fetch('https://1mkbfmthe9.execute-api.us-east-2.amazonaws.com/getLatestImage')
         .then(response => {
             if (response.ok) {
