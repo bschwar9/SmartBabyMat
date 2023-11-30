@@ -43,7 +43,7 @@ document.getElementById('audioButton').addEventListener('click', playLatestAudio
 
 // This function fetches and displays weight data
 function displayWeightData() {
-    const startDate = '2023-10-01T16:22:14.452559';
+    const startDate = '2023-11-04T16:22:14.452559';
     const endDate = '2023-11-04T17:52:14.452559';
     const apiUrl = `https://1mkbfmthe9.execute-api.us-east-2.amazonaws.com/getWeights?startDate=${startDate}&endDate=${endDate}`;
 
@@ -56,16 +56,14 @@ function displayWeightData() {
         })
         .then(data => {
             const tableBody = document.getElementById('weightTable').querySelector('tbody');
-            tableBody.innerHTML = ''; // Clear existing rows
-
+            // Convert fetched data into a plain text string
+            let plainTextData = '';
             data.forEach(item => {
-                const row = tableBody.insertRow();
-                const dateCell = row.insertCell(0);
-                const weightCell = row.insertCell(1);
-
-                dateCell.textContent = item.date; // Assuming 'date' is a property in your data
-                weightCell.textContent = item.weight; // Assuming 'weight' is a property in your data
+                // Append each data item as a line of text
+                plainTextData += `${item.date}: ${item.weight}\n`; // Adjust keys according to your actual data properties
             });
+            // Insert plain text data into the table body
+            tableBody.innerHTML = `<tr><td><pre>${plainTextData}</pre></td></tr>`;
         })
         .catch(error => {
             console.error('There was a problem with fetching weight data:', error);
