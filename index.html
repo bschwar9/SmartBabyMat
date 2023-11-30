@@ -1,27 +1,3 @@
-<!--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Latest Raspberry Pi Image</title>
-    <style>
-        #raspberryImage {
-            width: 50%; /* or any size in pixels, like 500px */
-            height: 50%;
-            display: block; /* to prevent inline extra space */
-            margin: 0 auto; /* to center the image on the page */
-        }
-    </style>
-</head>
-<body>
-    <h1>Latest Image from Raspberry Pi</h1>
-    <img id="raspberryImage" src="" alt="Latest Raspberry Pi Image">
-    <script src="script.js"></script>
-</body>
-</html>
--->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,15 +41,11 @@
             75% { filter: hue-rotate(270deg); }
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1/dist/confetti.min.js"></script>
 </head>
 <body>
     <h1>SmartBabyMat</h1>
     <img id="raspberryImage" src="" alt="Latest Raspberry Pi Image" onclick="toggleSpinningEffect()">
-    
-    <!-- Audio button -->
     <button id="audioButton">Play Latest Audio</button>
-
 
     <!-- New Table Section -->
     <div id="weightData">
@@ -91,61 +63,11 @@
         </table>
     </div>
 
+    <!-- Scripts at the bottom of the body -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1/dist/confetti.min.js"></script>
+    <script src="script.js"></script>
     <script>
-        // Function to toggle spinning animation on the image
-        function toggleSpinningEffect() {
-            var img = document.getElementById('raspberryImage');
-            img.classList.toggle('spinning');
-        }
-
-        // Function to fetch and play the latest audio
-        function playLatestAudio() {
-            fetch('https://1mkbfmthe9.execute-api.us-east-2.amazonaws.com/getLatestAudio')
-                .then(response => {
-                    if (response.ok) {
-                        return response.blob();
-                    }
-                    throw new Error('Network response was not ok.');
-                })
-                .then(blob => {
-                    const audioUrl = URL.createObjectURL(blob);
-                    const audio = new Audio(audioUrl);
-                    audio.play();
-                })
-                .catch(error => {
-                    console.error('There has been a problem with your fetch operation:', error);
-                });
-        }
-
-        // Event listener for the audio button
-        document.getElementById('audioButton').addEventListener('click', playLatestAudio);
-
-        // This function will run when the DOM is fully loaded
-        window.addEventListener('DOMContentLoaded', (event) => {
-            // Fetch and display the latest image from the Raspberry Pi
-            fetch('https://1mkbfmthe9.execute-api.us-east-2.amazonaws.com/getLatestImage')
-                .then(response => {
-                    if (response.ok) {
-                        return response.blob();
-                    }
-                    throw new Error('Network response was not ok.');
-                })
-                .then(blob => {
-                    const imageUrl = URL.createObjectURL(blob);
-                    document.getElementById('raspberryImage').src = imageUrl;
-                })
-                .catch(error => {
-                    console.error('There has been a problem with your fetch operation:', error);
-                });
-        });
+        // The contents of script.js should be pasted here if you want to include it inline instead of linking to an external file
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
