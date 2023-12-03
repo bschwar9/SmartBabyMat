@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to fetch and display weight data
     function displayWeightData() {
-        const startDate = '2023-11-04T16:22:14.452559';
-        const endDate = '2023-11-04T17:52:14.452559';
+        const startDate = '2020-11-04T16:22:14.452559';
+        const endDate = '2025-11-04T17:52:14.452559';
         const apiUrl = `https://1mkbfmthe9.execute-api.us-east-2.amazonaws.com/getWeights?startDate=${startDate}&endDate=${endDate}`;
 
         fetch(apiUrl)
