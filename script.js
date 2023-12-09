@@ -1,14 +1,14 @@
-// Event listener for the image to toggle spinning effect
+//spinning effect event listener
 document.addEventListener('DOMContentLoaded', function() {
     var img = document.getElementById('raspberryImage');
     img.addEventListener('click', function() {
-        // Toggle the spinning effect on the image
+        //toggles spin for fun
         this.classList.toggle('spinning');
     });
 
     var audio = new Audio();
 
-    // Function to fetch and play the latest audio
+    //fetches and plays latest audio
     document.getElementById('audioButton').addEventListener('click', function() {
         fetch('https://1mkbfmthe9.execute-api.us-east-2.amazonaws.com/getLatestAudio')
             .then(response => {
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     });
 
-    // Function to fetch and display weight data
+    //fetches and displays weight data
     function displayWeightData() {
         const startDate = '2020-11-04T16:22:14.452559';
         const endDate = '2025-11-04T17:52:14.452559';
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    // Fetch and display the latest image from the Raspberry Pi
+    //image stuff
     fetch('https://1mkbfmthe9.execute-api.us-east-2.amazonaws.com/getLatestImage')
         .then(response => {
             if (response.ok) {
